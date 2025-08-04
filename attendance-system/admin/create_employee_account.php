@@ -47,54 +47,63 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Create Employee Account - Attendance Management System</title>
+    <title>Admin Dashboard - Attendance Management System</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <link href="../assets/css/style.css" rel="stylesheet">
+    <link href="../assets/css/dashboard.css" rel="stylesheet">
 </head>
 <body>
-    <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="dashboard.php">
-                <i class="fas fa-clock me-2"></i>Attendance System
+    <!-- Sidebar -->
+    <div class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <h4><i class="fas fa-clock me-2"></i>AttendanceMS</h4>
+        </div>
+        
+        <nav class="sidebar-menu">
+            <a class="nav-link active" href="dashboard.php">
+                <i class="fas fa-tachometer-alt"></i>
+                <span>Dashboard</span>
             </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav me-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="dashboard.php">
-                            <i class="fas fa-tachometer-alt me-1"></i>Dashboard
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="employees.php">
-                            <i class="fas fa-users me-1"></i>Employees
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link active" href="create_employee_account.php">
-                            <i class="fas fa-user-plus me-1"></i>Create Account
-                        </a>
-                    </li>
-                </ul>
-                <ul class="navbar-nav">
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown">
-                            <i class="fas fa-user me-1"></i><?php echo htmlspecialchars($_SESSION['full_name']); ?>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="../auth/logout.php">
-                                <i class="fas fa-sign-out-alt me-2"></i>Logout
-                            </a></li>
-                        </ul>
-                    </li>
-                </ul>
+            <a class="nav-link" href="employees.php">
+                <i class="fas fa-users"></i>
+                <span>Employees</span>
+            </a>
+            <a class="nav-link" href="reports.php">
+                <i class="fas fa-chart-bar"></i>
+                <span>Reports</span>
+            </a>
+            <a class="nav-link" href="export.php">
+                <i class="fas fa-download"></i>
+                <span>Export</span>
+            </a>
+        </nav>
+        
+        <div class="user-profile">
+            <div class="user-info">
+                <div class="fw-bold"><?php echo htmlspecialchars($_SESSION['full_name']); ?></div>
+                <small class="text-light">Administrator</small>
+            </div>
+            <a href="../auth/logout.php" class="logout-btn">
+                <i class="fas fa-sign-out-alt me-2"></i>
+                <span>Logout</span>
+            </a>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content" id="mainContent">
+        <!-- Top Navigation Bar -->
+        <div class="top-navbar d-flex justify-content-between align-items-center">
+            <div class="d-flex align-items-center">
+                <button class="toggle-sidebar me-3" onclick="toggleSidebar()">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <h5 class="mb-0">Dashboard</h5>
+            </div>
+            <div class="d-flex align-items-center">
+                <span class="text-muted">Welcome back, <?php echo htmlspecialchars($_SESSION['full_name']); ?>!</span>
             </div>
         </div>
-    </nav>
 
     <div class="container-fluid mt-4">
         <div class="row">
